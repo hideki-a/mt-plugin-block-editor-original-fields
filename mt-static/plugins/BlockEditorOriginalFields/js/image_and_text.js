@@ -1,12 +1,14 @@
 ; (function ($) {
     var BEF = MT.BlockEditorField;
-    var label = trans('image_and_text');
+    var label = trans('ImageAndText');
 
     BEF.ImageAndText = function () { BEF.apply(this, arguments) };
-    BEF.ImageAndText.create_button = function () {
-        return $('<div class="add"><div class="mt-icon--contentblock"><svg title="' + label + '" role="img" class="mt-icon mt-icon--sm"><use xlink:href="' + StaticURI + 'plugins/BlockEditorOriginalFields/images/sprite.svg#ic_image_and_text"></use></svg></div><label>' + label + '</label></div>');
-
-    };
+    $.extend(BEF.ImageAndText, {
+        label: trans('ImageAndText'),
+        create_button: function () {
+          return $('<button type="button" class="btn btn-contentblock"><svg title="' + label + '" role="img" class="mt-icon"><use xlink:href="' + StaticURI + 'plugins/BlockEditorOriginalFields/images/sprite.svg#ic_image_and_text"></use></svg>' + label + '</button>');
+        },
+    });
     $.extend(BEF.ImageAndText.prototype, BEF.prototype, {
         id: '',
         input_field: '',
