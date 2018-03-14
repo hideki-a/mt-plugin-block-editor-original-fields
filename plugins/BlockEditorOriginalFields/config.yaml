@@ -9,4 +9,4 @@ blockeditor_fields:
   image_and_text:
     label: 'Image And Text'
     order: 50
-    path: "mt-static/plugins/BlockEditorOriginalFields/js/image_and_text.js"
+    path: "plugins/BlockEditorOriginalFields/js/image_and_text.js"
