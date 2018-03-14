@@ -37,7 +37,7 @@
             self.id = id;
             self.input_field = $('<div class="row no-gutters py-2"><div class="col col-md-6"><div class="form-group"><div class="asset_field"><input type="hidden" name="' + id + '-url" id="' + id + '-url" value=""><input type="hidden" name="' + id + '" id="' + id + '" value=""></div></div></div></div>');
             var edit_link = $('<div class="edit-image-link"></div>');;
-            var edit_image_link = $('<div class="rounded-circle action-link"><a href="' + ScriptURI + '?__mode=dialog_list_asset&amp;edit_field=' + id + '&amp;blog_id=' + $('[name=blog_id]').val() + '&amp;dialog_view=1&amp;filter=class&amp;filter_val=image&amp;no_insert=1&amp;next_mode=block_editor_asset" class="edit_image mt-open-dialog mt-modal-open" data-mt-modal-large>' + trans('edit Image') + '</a></div>');
+            var edit_image_link = $('<div class="rounded-circle action-link"><a href="#" class="edit_image mt-open-dialog mt-modal-open" data-mt-modal-large>' + trans('edit Image') + '</a></div>');
             var delete_image_link = $('<div class="remove_image rounded-circle action-link"><a href="#" class="remove_image">' + trans('delete') + '</a></div>');
             edit_link.append(edit_image_link);
             edit_link.append(delete_image_link);
@@ -76,7 +76,7 @@
 
             self.preview_field.append(edit_link);
             self.input_field.find('.asset_field').append(self.preview_field);
-            self.input_field.find('a.mt-modal-open').mtModal();
+            // self.input_field.find('a.mt-modal-open').mtModal();
 
             edit_link.on('click', '.remove_image', function(event){
                 event.preventDefault();
@@ -85,7 +85,31 @@
                 $('#' + id).val('');
             })
 
+            edit_image_link.find('a').on('click',function(){
+                var link = self.get_edit_link();
+                $(this).mtModal.open(link, {large: true});
+                return false;
+            });
+
             return self.input_field;
+        },
+        get_edit_link: function(){
+            var self = this;
+            var data = self.get_data();
+            var link = ScriptURI;
+            link += '?__mode=blockeditor_dialog_list_asset';
+            link += '&amp;edit_field=' + self.id;
+            link += '&amp;blog_id=' + $('[name=blog_id]').val();
+            link += '&amp;dialog_view=1';
+            link += '&amp;filter=class';
+            link += '&amp;filter_val=image';
+            link += '&amp;next_mode=block_editor_dialog_insert_options';
+            link += '&amp;asset_select=1';
+            if(self.asset_id && self.asset_id != ''){
+                link += '&amp;asset_id=' + self.asset_id ;
+            }
+            link += '&amp;options=' + JSON.stringify(self.options);
+            return link;
         },
         get_field_options: function (field_options) {
             var self = this;
