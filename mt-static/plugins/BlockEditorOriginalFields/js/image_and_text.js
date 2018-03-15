@@ -64,15 +64,12 @@
             ];
             self.input_field.append($(textarea.join('')));
 
-            // ひとまず簡易的な対応で
-            window.setTimeout(function () {
-                $('#' + self.id + '-content').each(function () {
-                    new MT.EditorManager(this.id, {
-                        format: 'richtext',
-                        wrap: true,
-                    });
+            $(window).one('field_created', function () {
+                new MT.EditorManager(self.id + '-content', {
+                    format: 'richtext',
+                    wrap: true,
                 });
-            }, 500);
+            });
 
             self.preview_field.append(edit_link);
             self.input_field.find('.asset_field').append(self.preview_field);
