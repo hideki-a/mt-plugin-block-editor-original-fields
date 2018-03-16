@@ -80,7 +80,11 @@
                 self.preview_field.css('background-image', 'none');
                 $('#' + id + '-url').val('');
                 $('#' + id).val('');
-            })
+                Object.keys(self.options).forEach(function (key) {
+                    self.options_field.find('#' + self.id + '_option_' + key).val('');
+                    self.options = [];
+                });
+            });
 
             edit_image_link.find('a').on('click',function(){
                 var link = self.get_edit_link();
