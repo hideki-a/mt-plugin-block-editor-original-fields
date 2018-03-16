@@ -178,7 +178,7 @@
                 return '';
             }
             const html = [
-                `<div class="lytimage -image${self.options.image_position}">`,
+                `<div class="lytimage -image${self.options['image_position_' + self.id]}">`,
                 `<div class="lytimage__image">`,
                 `<img src="${$('#' + self.id + '-url').val()}" data-asset-id="${$('#' + self.id).val()}" alt="${$('#' + self.id + '_option_alt').val()}">`,
                 `</div>`,
