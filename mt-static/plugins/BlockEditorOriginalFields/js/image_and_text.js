@@ -143,10 +143,10 @@
             self.options_field.on('change', 'input', callback);
 
             Object.keys(self.options).forEach(function (key) {
-                if (key === 'image_position') {
-                    if (self.options.image_position === 'L') {
+                if (key.indexOf('image_position') > -1) {
+                    if (self.options[key] === 'L') {
                         self.options_field.find('input#' + self.id + '-left').prop('checked', true);
-                    } else if (self.options.image_position === 'R') {
+                    } else if (self.options[key] === 'R') {
                         self.options_field.find('input#' + self.id + '-right').prop('checked', true);
                     }
                 } else {
